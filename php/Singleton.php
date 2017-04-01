@@ -45,7 +45,7 @@ class Singleton{
 }
 $instance = Singleton::getInstance();
 /**
- * 测试序列化
+ * 测试序列化 未设置 __wakeup 异常或者未私有化__wakeup 
 $serlizeObj = serialize($instance);
 $objOne     = unserialize($serlizeObj);
 $objTwo     = unserialize($serlizeObj);
@@ -57,7 +57,7 @@ var_dump($objOne === $objTwo); //return false 序列化可以造成多个示例
  * return fatal error 不能被实例化 只能通过自身实例
  */
 
-/** 测试代码
+/** 测试代码 未设置 __clone 异常或者未私有化__clone 
 $instance = Singleton::getInstance();
 $instance_clone = clone $instance;
 var_dump($instance === $instance);  //return false clone可以造成多个示例
