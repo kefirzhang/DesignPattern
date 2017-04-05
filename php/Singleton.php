@@ -1,19 +1,19 @@
 <?php
 /**
- * @desc µ¥ÀýÄ£Ê½ÊÇÒ»ÖÖ³£ÓÃµÄÈí¼þÉè¼ÆÄ£Ê½¡£ÔÚËüµÄºËÐÄ½á¹¹ÖÐÖ»°üº¬Ò»¸ö±»³ÆÎªµ¥ÀýµÄÌØÊâÀà¡£Í¨¹ýµ¥ÀýÄ£Ê½¿ÉÒÔ±£Ö¤ÏµÍ³ÖÐÒ»¸öÀàÖ»ÓÐÒ»¸öÊµÀý
- * ²Î¿¼×ÊÁÏ
+ * @desc å•ä¾‹æ¨¡å¼æ˜¯ä¸€ç§å¸¸ç”¨çš„è½¯ä»¶è®¾è®¡æ¨¡å¼ã€‚åœ¨å®ƒçš„æ ¸å¿ƒç»“æž„ä¸­åªåŒ…å«ä¸€ä¸ªè¢«ç§°ä¸ºå•ä¾‹çš„ç‰¹æ®Šç±»ã€‚é€šè¿‡å•ä¾‹æ¨¡å¼å¯ä»¥ä¿è¯ç³»ç»Ÿä¸­ä¸€ä¸ªç±»åªæœ‰ä¸€ä¸ªå®žä¾‹
+ * å‚è€ƒèµ„æ–™
  * @link http://php.net/manual/zh/language.oop5.magic.php 
  * @link https://wwphp-fb.github.io/articles/object-oriented-programming/design-patterns/singleton/
  * @link http://www.phptherightway.com/pages/Design-Patterns.html
  */
 class Singleton{
-    //Ë½ÓÐ±äÁ¿ÓÃÀ´±£´æµ¥Àý
+    //ç§æœ‰å˜é‡ç”¨æ¥ä¿å­˜å•ä¾‹
     private static $_instance;
-    //Ë½ÓÐ»¯Îö¹¹º¯Êý  Ö»ÄÜ×Ô¼ºµ÷ÓÃ£¬²»ÄÜÍ¨¹ýnew ÊµÀý»¯
+    //ç§æœ‰åŒ–æžæž„å‡½æ•°  åªèƒ½è‡ªå·±è°ƒç”¨ï¼Œä¸èƒ½é€šè¿‡new å®žä¾‹åŒ–
     private final function __construct(){}
     /**
-     * @desc Ö»ÄÜÍ¨¹ýÕâ¸ö½Ó¿ÚÀ´»ñÈ¡ÊµÀý
-     * @return singleTon ·µ»ØÊµÀýÀà
+     * @desc åªèƒ½é€šè¿‡è¿™ä¸ªæŽ¥å£æ¥èŽ·å–å®žä¾‹
+     * @return singleTon è¿”å›žå®žä¾‹ç±»
      */
     public static function getInstance(){
         if(!self::$_instance instanceof  self){
@@ -22,22 +22,22 @@ class Singleton{
         return self::$_instance;
     }
     /**
-     * @desc ·ÀÖ¹Í¨¹ý¿ËÂ¡¶ÔÏóÔì³É¶à¸öÊµÀý  »òÕß private Ë½ÓÐ»¯µ±Ç°º¯Êý
-     * @return Exception Òì³£Å×³ö
+     * @desc é˜²æ­¢é€šè¿‡å…‹éš†å¯¹è±¡é€ æˆå¤šä¸ªå®žä¾‹  æˆ–è€… private ç§æœ‰åŒ–å½“å‰å‡½æ•°
+     * @return Exception å¼‚å¸¸æŠ›å‡º
      */
     public function __clone(){
         throw new Exception('You cannot clone singleton object');
     }
     /**
-     * @desc ·ÀÖ¹ÐòÁÐ»¯¿ËÂ¡¶ÔÏóÔì³É¶à¸öÊµÀý »òÕß private Ë½ÓÐ»¯µ±Ç°º¯Êý
-     * @return Exception Òì³£Å×³ö
+     * @desc é˜²æ­¢åºåˆ—åŒ–å…‹éš†å¯¹è±¡é€ æˆå¤šä¸ªå®žä¾‹ æˆ–è€… private ç§æœ‰åŒ–å½“å‰å‡½æ•°
+     * @return Exception å¼‚å¸¸æŠ›å‡º
      */
     public function __wakeup(){
         throw new Exception('You cannot unserializing singleton object');
     }
     /**
-     * @desc ¹«¹²º¯Êý·þÎñ ÓÃÀ´²âÊÔ
-     * @return __FUNCTION__ ·µ»Øµ±Ç°º¯ÊýÃû
+     * @desc å…¬å…±å‡½æ•°æœåŠ¡ ç”¨æ¥æµ‹è¯•
+     * @return __FUNCTION__ è¿”å›žå½“å‰å‡½æ•°å
      */
     public function funcOne(){
         return __FUNCTION__;
@@ -45,20 +45,20 @@ class Singleton{
 }
 $instance = Singleton::getInstance();
 /**
- * ²âÊÔÐòÁÐ»¯ Î´ÉèÖÃ __wakeup Òì³£»òÕßÎ´Ë½ÓÐ»¯__wakeup 
+ * æµ‹è¯•åºåˆ—åŒ– æœªè®¾ç½® __wakeup å¼‚å¸¸æˆ–è€…æœªç§æœ‰åŒ–__wakeup 
 $serlizeObj = serialize($instance);
 $objOne     = unserialize($serlizeObj);
 $objTwo     = unserialize($serlizeObj);
-var_dump($objOne === $objTwo); //return false ÐòÁÐ»¯¿ÉÒÔÔì³É¶à¸öÊ¾Àý
+var_dump($objOne === $objTwo); //return false åºåˆ—åŒ–å¯ä»¥é€ æˆå¤šä¸ªç¤ºä¾‹
 **/
 
 /**
  * $b = new Singleton();
- * return fatal error ²»ÄÜ±»ÊµÀý»¯ Ö»ÄÜÍ¨¹ý×ÔÉíÊµÀý
+ * return fatal error ä¸èƒ½è¢«å®žä¾‹åŒ– åªèƒ½é€šè¿‡è‡ªèº«å®žä¾‹
  */
 
-/** ²âÊÔ´úÂë Î´ÉèÖÃ __clone Òì³£»òÕßÎ´Ë½ÓÐ»¯__clone 
+/** æµ‹è¯•ä»£ç  æœªè®¾ç½® __clone å¼‚å¸¸æˆ–è€…æœªç§æœ‰åŒ–__clone 
 $instance = Singleton::getInstance();
 $instance_clone = clone $instance;
-var_dump($instance === $instance);  //return false clone¿ÉÒÔÔì³É¶à¸öÊ¾Àý
+var_dump($instance === $instance);  //return false cloneå¯ä»¥é€ æˆå¤šä¸ªç¤ºä¾‹
 */
