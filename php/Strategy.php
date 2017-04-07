@@ -10,14 +10,14 @@
 /**
  * 消息处理策略
  */
-interface MessageStrategy{
-    public function messageAlgorithm();
+interface Strategy{
+    public function handle();
 }
 /**
  *@desc 具体策略 case
  */
-class EchoCliMessageStrategy implements MessageStrategy{
-    public function messageAlgorithm(){
+class EchoCliStrategy implements Strategy{
+    public function handle(){
         //Func Coding........
         echo "Strategy:".__CLASS__;
     }
@@ -25,8 +25,8 @@ class EchoCliMessageStrategy implements MessageStrategy{
 /**
  *@desc 具体策略 case
  */
-class SaveTxtMessageStrategy implements MessageStrategy{
-    public function messageAlgorithm(){
+class SaveTxtStrategy implements Strategy{
+    public function handle(){
         //Func Coding........
         echo "Strategy:".__CLASS__;
     }
@@ -34,8 +34,8 @@ class SaveTxtMessageStrategy implements MessageStrategy{
 /**
  *@desc 具体策略 case
  */
-class SaveDBMessageStrategy implements MessageStrategy{
-    public function messageAlgorithm(){
+class SaveDBStrategy implements Strategy{
+    public function handle(){
         //Func Coding........
         echo "Strategy:".__CLASS__;
     }
@@ -43,8 +43,8 @@ class SaveDBMessageStrategy implements MessageStrategy{
 /**
  *@desc 具体策略 case
  */
-class SaveRedisMessageStrategy implements MessageStrategy{
-    public function messageAlgorithm(){
+class SaveRedisStrategy implements Strategy{
+    public function handle(){
         //Func Coding........
         echo "Strategy:".__CLASS__;
     }
@@ -52,27 +52,27 @@ class SaveRedisMessageStrategy implements MessageStrategy{
 /**
  * @desc 客户端类或者环境类，定义一个接口让strategy访问对应的数据接口
  */
-class MessageClient{
+class Client{
     private $_strategy;
-    public function __construct(MessageStrategy $strategy){
+    public function __construct(Strategy $strategy){
         $this->_strategy = $strategy;
     }
-    public function setStrategy(MessageStrategy $strategy){
+    public function setStrategy(Strategy $strategy){
         $this->_strategy = $strategy;
     }
-    public function handleMessage(){
-        $this->_strategy->messageAlgorithm();
+    public function handle(){
+        $this->_strategy->handle();
     }
 }
 //消息直接输出
-$message = new MessageClient(new EchoCliMessageStrategy());
-$message->handleMessage();
+$client = new Client(new EchoCliStrategy());
+$client->handle();
 //消息通过Redis处理
-$message = new MessageClient(new SaveRedisMessageStrategy());
-$message->handleMessage();
+$client = new Client(new SaveRedisStrategy());
+$client->handle();
 //变更策略
-$message->setStrategy(new SaveDBMessageStrategy());
-$message->handleMessage();
+$client->setStrategy(new SaveTxtStrategy());
+$client->handle();
 
 
 
