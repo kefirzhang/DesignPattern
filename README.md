@@ -16,3 +16,6 @@ Template Method（模版方法）定义一个操作的算法结构，但是把�
 .......
 
 通过各种代码去实现相应的设计模式，来练习代码！
+参考资料：
+http://blog.csdn.net/cooldragon/article/details/52164380
+http://www.phperz.com/special/110.html
