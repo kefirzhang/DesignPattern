@@ -47,11 +47,11 @@ class Receiver{ //一般是具体的类，第三方提供的类
      */
 }
 class Invoker { //招待员 招待员接到下的订单命令 并让这个封装的命令执行
+    //这里 有两个点没有去实现 setCommand 动态的变更命令
+    //或者 命令集合 用数组保存 excute的时候 遍历执行，类似队列的形式等等  删除命令 撤销命令 这些都是在这个的基础上的其他特性
+    //这里为了更简单的理解命令模式 所以暂时不实现，以后有机会可以实现一个完整的demo或者用具体的实例来做
     private $concreteCommand;//具体的封装了reciver和具体的execute的类
     public function __construct(Command $concreteCommand){ //这边可以用setCommand 封装多个命令 
-        $this->concreteCommand = $concreteCommand;
-    }
-    public function setCommand(Command $concreteCommand){ //这边可以用setCommand 封装多个命令
         $this->concreteCommand = $concreteCommand;
     }
     public function executeCommand(){ // 招待下单 触发执行  orderUp
